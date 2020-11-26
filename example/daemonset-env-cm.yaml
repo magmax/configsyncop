@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemonset-env-cm
+spec:
+  selector:
+    matchLabels:
+      name: daemonset
+  template:
+    metadata:
+      labels:
+        name: daemonset
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        env:
+        - name: CM 
+          valueFrom:
+            configMapKeyRef:
+              name: example
+              key: example

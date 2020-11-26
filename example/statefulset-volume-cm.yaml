@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: statefulset-volume-cm
+spec:
+  selector:
+    matchLabels:
+      app: nginx 
+  serviceName: "statefulset-volume-cm"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx 
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+      volumes:
+      - name: cm 
+        configMap:
+          name: example

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configsyncop
+  namespace: configsyncop
+  labels:
+    app: configsyncop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configsyncop
+  template:
+    metadata:
+      labels:
+        app: configsyncop
+    spec:
+      serviceAccountName: configsyncop
+      containers:
+      - name: configsyncop
+        image: configsyncop

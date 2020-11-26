@@ -1,0 +1,2 @@
+kopf == 0.28
+prometheus_client == 0.9.0

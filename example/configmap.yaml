@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example
+  annotations:
+    k8s.config.sync.manage: "true"
+data:
+  example: value
