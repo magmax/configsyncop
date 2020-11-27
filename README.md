@@ -34,3 +34,7 @@ are four flavours:
 - _*-env-cm.yaml_: uses the configmap as an environment variable.
 - _*-volume-cm.yaml_: uses the configmap as a volume.
 
+
+## Monitoring
+
+Automatically exposes Prometheus metrics on port 9090.
