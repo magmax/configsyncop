@@ -32,5 +32,5 @@ are four flavours:
 - _*-env-secret.yaml_: uses the secret as an environment variable.
 - _*-volume-secret.yaml_: uses the secret as a volume.
 - _*-env-cm.yaml_: uses the configmap as an environment variable.
-- _*-env-cm.yaml_: uses the configmap as a volume.
+- _*-volume-cm.yaml_: uses the configmap as a volume.
 
