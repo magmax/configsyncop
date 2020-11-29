@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - 'v*'
+    paths:
+      - 'src/**'
 
   workflow_dispatch:
 
@@ -35,7 +37,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./
+          context: ./src/
           file: ./Dockerfile
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
