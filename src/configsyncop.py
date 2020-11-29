@@ -47,13 +47,28 @@ class ConfigResource:
 
     def handle(self):
         with REQUEST_TIME.labels(self.kind).time():
-            if self.annotations.get(HANDLE_ANNOTATION, "").lower() not in ("true", "1"):
+            if not self._must_handle():
                 logger.debug(f"{self.kind}/{self.name} not annotated")
                 return
             logger.info(f"Handler for {self.kind} {self.name} on {self.namespace} -> {self._hash}")
             self._update_template_based_resource(pykube.Deployment, "Deployment")
             self._update_template_based_resource(pykube.DaemonSet, "DaemonSet")
             self._update_template_based_resource(pykube.StatefulSet, "StatefulSet")
+
+    def _must_handle(self):
+        if self.annotations.get(HANDLE_ANNOTATION, "").lower() in ("true", "1"):
+            return True
+        namespace = self._get_namespace()
+        if not namespace:
+            return False
+        annotation = f"{HANDLE_ANNOTATION}/{self.kind}"
+        if namespace.annotations.get(annotation) in ("true", "1"):
+            return True
+        return False
+
+    def _get_namespace(self):
+        api = pykube.HTTPClient(pykube.KubeConfig.from_env())
+        return pykube.Namespace.objects(api).get_by_name(self.namespace)
 
     def _generate_hash(self, data):
         json_data = json.dumps(data, sort_keys=True)

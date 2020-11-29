@@ -16,7 +16,9 @@ deployment, daemonset or statefulset using that secret/configmap.
 ## Usage
 
 1. Annotate your *configmaps* or *secrets* with `k8s.config.sync.manage: "true"`.
-
+1. Annotate your *namespaces* with `k8s.config.sync.manage/Secret: "true"` and/or 
+   `k8s.config.sync.manage/ConfigMap: "true"` to manage all *Secrets* or
+   *ConfigMaps* in that namespace.
 
 ## Examples
 
