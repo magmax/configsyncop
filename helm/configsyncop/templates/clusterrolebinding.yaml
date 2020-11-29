@@ -1,0 +1,15 @@
+{{- if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ template "configsyncop.fullname" . }}
+roleRef:
+  apiGroup: ""
+  kind: ClusterRole
+  name: {{ template "configsyncop.fullname" . }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "configsyncop.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
+
+{{- end -}}
